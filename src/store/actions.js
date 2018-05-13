@@ -11,7 +11,8 @@ http.interceptors.response.use(
 )
 
 export default {
-  anAction ({state, commit}, {data, callback}) {
+  anAction ({state, commit}, args = {}) {
+    const {data, callback} = args
     http.post('/url', {...data, id: state.someState.id,}).then(({data}) => {
       if (data.success) {
         commit('setState', {someState: data.someState})
